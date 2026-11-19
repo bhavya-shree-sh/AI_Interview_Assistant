@@ -1,72 +1,24 @@
 import streamlit as st
 from groq import Groq
-
-st.set_page_config(
-    page_title="AI Interview Assistant",
-    layout="centered"
-)
-
+st.set_page_config(page_title = 'AI assistant interview', layout='centered')
 st.title("AI Interview Assistant")
-st.caption("made by Bhavyashree")
-
-# Connect to Groq API
+st.caption("Launched By Harshitha")
 try:
-    client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-
-except Exception as e:
-    st.error("API Key is missing or incorrect. Check Streamlit Secrets.")
-    st.stop()
-
-# Job Title
-role = st.selectbox(
-    "Job Title",
-    [
-        "Machine Learning Engineer",
-        "Senior Software",
-        "DevOps Engineer",
-        "Data Analyst",
-        "Other"
-    ]
-)
-
-if role == "Other":
-    role = st.text_input("Enter your Job Title")
-
-# Model selection
-model = st.selectbox(
-    "Model",
-    ["openai/gpt-oss-120b", "openai/gpt-oss-20b"]
-)
-
-# Difficulty
-level = st.selectbox(
-    "Difficulty",
-    ["Beginner", "Intermediate", "Advanced"]
-)
-
-# Activity
-mode = st.radio(
-    "Activity",
-    [
-        "Generate Questions",
-        "Generate Code Questions",
-        "Evaluate Answers",
-        "Improve Answers"
-    ]
-)
-
-if mode == "Generate Questions":
-    count = st.slider("Number of Questions", 1, 10, 5)
-
-elif mode == "Generate Code Questions":
-    topic = st.selectbox(
-        "Topics",
-        ["SQL", "AIML", "Python", "DSA", "Java", "C/C++"]
-    )
-    count = st.slider("Number of Questions", 1, 10, 5)
-
+  client = Groq(api_key = st.secrets["GROQ_API_KEY"])
+except (KeyError, FileNotFound):
+  st.error("API Key is missing. Add it in Advanced settings")
+  st.stop()
+role = st.selectbox('Job Title', ['Machine Learning Engineer','Senior Software','DevOPs Engineer','Data Analyst','Other'])
+if role == 'Other':
+  st.text_input('Enter you Job Title','XXXXXXX')
+model = st.selectbox('Model', ['openai/gpt-oss-120b','openai/gpt-oss-20b'])
+level = st.selectbox('Difficulty',['Beginner', 'Intermediate', 'Adavanced'])
+mode = st.radio('Activity', ['Generate Questions','Generate Code Questions','Evaluate Answers','Improve Answers'])
+if mode == 'Generate Questions':
+  count = st.slider(1,10,5)
+elif mode == 'Generate Code Questions':
+  topic = st.selectbox('Topics', ['SQL', 'AIML', 'Python', 'DSA', 'Java', 'c/c++'])
+  count = st.slider("Number of Questions",1,10,5)
 else:
-    questions = st.text_area("Enter Interview Questions here")
-    answer = st.text_area("Enter your answer", height=160)
-
-st.write("Your selections are ready!")
+  questions = st.text_area('Enter Interview Questions here')
+  answer = st.text_area('Enter your answer', height =160)
