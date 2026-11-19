@@ -129,4 +129,3 @@ if st.button("Generate AI Response", type="primary"):
             st.error("API connection was unsuccessful.")
             st.info("Please check your API key and rate limits.")
             st.caption("Powered by Streamlit, GitHub and Groq API.")
-```
