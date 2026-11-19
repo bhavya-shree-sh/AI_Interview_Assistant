@@ -1,4 +1,4 @@
-
+```python
 import streamlit as st
 from groq import Groq
 
@@ -97,4 +97,36 @@ if st.button("Generate AI Response", type="primary"):
 
     with st.spinner("Generating your answer..."):
         try:
-            response = client.chat.completions.create
+            response = client.chat.completions.create(
+                model=gen_model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "Act as a senior interviewer and HR and technical expert."
+                    },
+                    {
+                        "role": "user",
+                        "content": background + task
+                    }
+                ],
+                temperature=0.7,
+                max_tokens=1800
+            )
+
+            output = response.choices[0].message.content
+
+            st.subheader("AI Response")
+            st.write(output)
+
+            st.download_button(
+                "Download Response",
+                output,
+                file_name="Interview_Response.txt",
+                mime="text/plain"
+            )
+
+        except Exception as e:
+            st.error("API connection was unsuccessful.")
+            st.info("Please check your API key and rate limits.")
+            st.caption("Powered by Streamlit, GitHub and Groq API.")
+```
