@@ -31,7 +31,7 @@ if st.button("Generate AI Response", type = "primary"):
   elif mode =="Generate Code Questions":
     task = "Generate" + str(count) + " Frequently asked coding questions on topic" + topic + "and give hints to solve them. Be accurate."
   elif mode == "Evaluate Answers":
-    tsak = "Question :" +question+"My Answer: " +answer +"Evaluate this answer based on concept,relavance,communication,lenght of answer. Give each rating out of Five in a list."
+    task = "Question :" +question+"My Answer: " +answer +"Evaluate this answer based on concept,relavance,communication,lenght of answer. Give each rating out of Five in a list."
   elif mode == "Improve Answers":
     task= "Question:" +question + "My answer :" + answer +" Improve the answer based on choice of words."
   background = "Job role :" + role + "Difficulty level" +  level
